@@ -1,0 +1,72 @@
+Hadoop - Framework
+
+HDFS - Hadoop Distributed File System - Storage
+MapReduce - processess - Map(distributes to all nodes) and reduces(results)
+YARN - OS of HADOOP - Yet Another Resource Negotiator
+
+
+MR-1 - Components
+Client
+Job Tracker - Master Deamon
+Node Tracker - Slave Deamon
+HDFS
+
+
+MR-2 - YARN
+Client
+Resource Manager - 
+Application Manager - Runs the applications of client by taking to Resource manager for resources and Node Manager for execution on the Nodes
+Node Manager
+HDFS
+
+Files
+core-site.xml - localhost Configurations
+hdfs-site.xml - Configures Replication factor and HDFS properties
+mapred-site.xml - Configures Map reduce framework
+yarn-site.xml 
+
+
+start-all.sh - start all deamon
+stop-all.sh - stop all deamon
+jps - to check for all deamon status
+
+
+PIG - Scripting and Programming on Apache Hadoop
+	Pig Latin Programming - Mapper and Reduce programs
+HIVE - Query and Summarize Data in HDFS
+Spark - Programming language for running processess on Hadoop very fast with API
+
+Distributed Platforms
+HortonWorks - Supports Windows
+Cloudera - 
+
+NoSQL (Not only SQL) Databases
+- Key Value - HBase
+- Document Oriented - Documents(JASON) and Collections
+- Wide Column Family - HBase, Cassandra (combining multiple columns to a single Family Column)
+- Graph Databases - Neo4j, TitanDB
+
+
+
+HDFS - Hadoop Distributed File System - Storage
+	NameNode - Metadata of Nodes - Single
+	DataNode - Actual Data - Multiple
+		Stored as blocks - 128MB
+[Upendra]$ ls  -> local file system
+[Upendra]$ hdfs ds -ls -> HDFS file System
+copy from local to hdfs
+[Upendra]$ hdfs dfs -put <filename> /user/xyz/hdfs/
+[Upendra]$ hadoop fsck /user/xyz/hdfs - gives the blocks information
+
+NameNode - SPOF(Single Point of Failure)
+Solution is to have two NameNode in Active and Passive status. 
+Passive namenodes syncs with changes to Active Namenode
+QuorumJournalManager - JournalNode have logs of the active NameNode.
+
+NameNode Contains
+Editlog - logs all the functions
+FsImage - namespace Image(mapping of blocks)
+
+
+Secondary NameNode - backup of NameNode
+
