@@ -19,7 +19,7 @@ Application Manager - Runs the applications of client by taking to Resource mana
 Node Manager
 HDFS
 
-Files
+Files ??
 core-site.xml - localhost Configurations
 hdfs-site.xml - Configures Replication factor and HDFS properties
 mapred-site.xml - Configures Map reduce framework
@@ -46,8 +46,6 @@ NoSQL (Not only SQL) Databases
 - Wide Column Family - HBase, Cassandra (combining multiple columns to a single Family Column)
 - Graph Databases - Neo4j, TitanDB
 
-
-
 HDFS - Hadoop Distributed File System - Storage
 	NameNode - Metadata of Nodes - Single
 	DataNode - Actual Data - Multiple
@@ -67,6 +65,72 @@ NameNode Contains
 Editlog - logs all the functions
 FsImage - namespace Image(mapping of blocks)
 
-
 Secondary NameNode - backup of NameNode
+
+
+sudo su -hdfs - to change the ownership
+
+
+MapReduce 
+- Programming Framework
+- Parallel Processing 
+- Map Function
+        - Each block is processed by each Mapper
+        - Input - HDFS block
+        - Output - Local Disk(Intermediate Output)
+        - Contains Business Logic
+- Reduce Functions
+        - Input - Local Disk from Mapper
+        - Output - HDFS block
+        - Aggregator and sorting functions 
+
+
+Input(HDFS) -> Split(block) -> RR(Record Reader Split in (k,v)) -> Partitioner (Shuffling) -> Reduce -> Output(HDFS)
+
+MapReduce Life Cycle - Hadoop 1X
+a) Client Submits the Job to JobTracker
+b) JobTracker would give JobId to client 
+c) Client has all the business logic(Map/Reduce Functions & Dependencies) which will be copies to HDFS to a temp Location with JobID file name(at run time and gets deleted later)
+d) Program Runs with the help of Job Tracker
+e) Job Tracker will send the request to NameNode to get the details of the data.
+f) NameNode sends the Metadata of the data nodes where the data exist.
+g) Job Tracker checks the heart beat of the data nodes for availability.
+h) Job Tracker will commands the healthy Datanodes task tracker to run it 
+i) and Task Trackers will copy the job from the Temp HDFS location with Job Id file name. - Each datanode will have task tracker(to run the job) and data
+j) Start the JVM of the Task Trackers of Data Node and execute the job on the data in the datanode
+k) the output of the datanodes and stored in a single machine 
+l) Reducer function runs on data of the datanode and write the output to the HDFS
+
+
+Commands
+hadoop fs -ls => to check for the list of file in HDFS at /user/Upendra/
+hadoop fs -mkdir store1  => Create a directory in HDFS at /user/Upendra/
+hadoop fs -put a.txt store1  => to move the local file to HDFS
+hadoop jar wcount.jar WordCount /user/upendra/store1/a.txt output1 => to run the local JAR in hadoop on HDFS
+hadoop fs -cat /user/upendra/output1/part-r-00000  => to look into the reducer part in HDFS
+hadoop fs -get /user/upendra/output1/part-r-00000  => to get the reducer to local system from HDFS
+
+4 V's of Big Data
+
+Volume
+Varity
+Variability
+Velocity
+
+
+Data Nodes in Hadoop 2X Contains
+Application master
+Container
+Node Manager
+Resource Manager
+
+
+The implementation of compression and decompression algorithm is known as codecs.
+
+Safe Mode ??
+different files 
+
+
+
+
 
