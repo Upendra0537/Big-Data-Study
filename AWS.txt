@@ -1,0 +1,26 @@
+Cloud Computing 
+Software as a service
+Platform as a service
+Infrastructure as a service
+
+
+AWS - Amazon Web Service
+Compute
+EC2 - Elastic Computer Cloud - Virtual computers
+Storage
+EBS - Elastic Block storage
+S3 - Simple Cloud Storage Service
+Database
+Developer Tools
+Management Tools
+Network and content delivery tools
+Security
+IoT
+Messaging
+Application Services
+Mobile Services
+
+
+
+
+

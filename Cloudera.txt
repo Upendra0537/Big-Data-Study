@@ -1,0 +1,50 @@
+Configuration Management Tool
+Cludera - Impala - Commercial
+Horton Works - Ambari - OpenSource - Stinger	
+MapR - Commercial - Hive
+Cloudera
+
+CDH - Cloudera Distributed Hadoop
+	Cloudera Imphala
+	Cloudera Search
+Cloudera Manager
+Cloudera Navigator
+
+
+
+Cluster -> Switches -> racks -> Nodes -> Host/server
+Service -> Roles -> Instances/Instance Groups
+
+CM Configuration Management
+CM Code Repository(Repo)
+CM Server
+CM Database
+CM Agents
+
+
+IMPALA - query language with less latency for analysis of hdfs and hbase
+
+
+Cloudera Manager - deploying, managing and monitoring a hadoop cluster - UI interface
+contains
+- Server
+	- Management Service
+	- Database
+- Agents
+- Client
+	- Console
+	- API
+
+Cloudera Manager needs to be installed on the centeralized server and also on all the agents
+
+
+Stages:
+Select
+Schedule
+Monitor
+Alert
+
+Cloudera Navigator - Data Management Tool
+Roles
+	- Navigator Audit Server
+	- Navigator Metadata Server
