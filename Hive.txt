@@ -1,0 +1,7 @@
+
+Create Table ??
+Temporary - Stores the metadata of the table  
+External - When dropped data exist, Metadata is dropped
+Internal - 
+
+Load ??

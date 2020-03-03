@@ -11,6 +11,7 @@ Job Tracker - Master Deamon
 Node Tracker - Slave Deamon
 HDFS
 
+SPARK - Framework - can we written in Java, Scala and Python. Iterative and in-memory jobs
 
 MR-2 - YARN
 Client
@@ -26,15 +27,17 @@ mapred-site.xml - Configures Map reduce framework
 yarn-site.xml 
 
 
-start-all.sh - start all deamon
+start-all.sh - start all deamon. 
 stop-all.sh - stop all deamon
 jps - to check for all deamon status
 
 
 PIG - Scripting and Programming on Apache Hadoop
 	Pig Latin Programming - Mapper and Reduce programs
-HIVE - Query and Summarize Data in HDFS
+HIVE - Query and Summarize Data in HDFS. Stored data in HCatalog and Hive Metastore. Used MapReduce at the backend
 Spark - Programming language for running processess on Hadoop very fast with API
+Drill - Query Language - Dynamic - Exploring data - Doesn't use Map Reduce - ANSI SQL Compliant
+Mahut - Suit of Libraries for Machine Learning
 
 Distributed Platforms
 HortonWorks - Supports Windows
@@ -130,6 +133,15 @@ The implementation of compression and decompression algorithm is known as codecs
 Safe Mode ??
 different files 
 
+9:46 PM 3/1/2020
+MAPR
+
+RDBMS - No Version of data, Changes to Database difficult
+NoSQL HBase - has Version Control at cell, flexible to add columns or changes. handles unstructured data, cant store real time data
+MapR Database (NoSQL)- Stores live streaming data, real time data with OJAI(Open JASON Application . Datastores in Binary format
+
+MapR Stream - to analysis the data as it arrives 
+Producer -> Topics -> Consumers
 
 
 

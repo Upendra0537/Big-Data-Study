@@ -4,7 +4,7 @@ Horton Works - Ambari - OpenSource - Stinger
 MapR - Commercial - Hive
 Cloudera
 
-CDH - Cloudera Distributed Hadoop
+CDH - Cloudera Distributed for Hadoop
 	Cloudera Imphala
 	Cloudera Search
 Cloudera Manager
@@ -18,7 +18,7 @@ Service -> Roles -> Instances/Instance Groups
 CM Configuration Management
 CM Code Repository(Repo)
 CM Server
-CM Database
+CM Database - PostgreSQL
 CM Agents
 
 
@@ -44,7 +44,16 @@ Schedule
 Monitor
 Alert
 
-Cloudera Navigator - Data Management Tool
+Cloudera Navigator - Data Management Tool - Similar to a Spool with logs
 Roles
 	- Navigator Audit Server
 	- Navigator Metadata Server
+
+HUE - interactive UI for Hadoop
+
+Cluster Management
+
+Stop/Start/restart of Cluster
+
+-Cloudera Enterprise Hadoop Managers
+-Cloudera Manager Admin Console
