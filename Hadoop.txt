@@ -3,7 +3,9 @@ Hadoop - Framework
 HDFS - Hadoop Distributed File System - Storage
 MapReduce - processess - Map(distributes to all nodes) and reduces(results)
 YARN - OS of HADOOP - Yet Another Resource Negotiator
+Common - collection of libraries to implement capabilities lacked by Hadoop
 
+Write once read multiple times - we dont want to override the data but append the data as we get (archival)
 
 MR-1 - Components
 Client
@@ -143,6 +145,18 @@ MapR Database (NoSQL)- Stores live streaming data, real time data with OJAI(Open
 MapR Stream - to analysis the data as it arrives 
 Producer -> Topics -> Consumers
 
+9:16 PM 3/2/2020
 
+PIG is an SQL like scripting language that helps users to write data manipulation operations without knowing Java.
+Mahout is a distributed linear algebra framework and a library of a scalable machine-learning algorithm.
+Hive is a framework for Datawarehousing on top of Hadoop.
+Spark is a framework for real-time processing and is written in Scala.
+HBase is NoSQL database.
+Apache Drill is SQL query engine used for analysis of the big data.
+Zookeeper helps in coordinating and managing services in a distributed environment.
+Apache Oozie is a scheduler that schedules Hadoop jobs.
+Apache Flume is a distributed, reliable and available software used for streaming data.
+Apache Sqoop can import and export structured data from RDBMS to HDFS and vice-versa.
+Apache Ambari takes care of provisioning, managing, and monitoring Hadoop ecosystem.
 
 

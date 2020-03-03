@@ -1,7 +1,48 @@
+HQL - Hive Query Language
 
-Create Table ??
-Temporary - Stores the metadata of the table  
-External - When dropped data exist, Metadata is dropped
-Internal - 
+turns to MapReduce to communicate with Hadoop/HDFS
+to query unstructured and semi-structured data on Hadoop.
+
+OLAP - Online Analytic Processing
+Cannot be used for OLTP (Online Transaction Processing)
+
+Creates Schema on Reading the data from HDFSHive
+
+Hive Supports multiple application using Driver
+	Hive JDBC Driver
+	Hive ODBC Driver
+	Hive Thrift Application
+
+Hive Driver
+Hive Server
+MetaStore - Schema is stored
+	- Embedded - Derby - one session at a time(not suitable for Production)
+	- Local Metastore - MySQL
+	- Remote Metastore
+
+
+Execution Process
+-> UI/CLI where the Hive query is written and given to driver
+-> Drive communicates with Compiler using Metastore and create a plan
+-> Plan is shared to the Execution Engine which also uses MetaStore and talks Hadoop for data retrieval
+
+Default Database - metastore_db
+case-sensitive
+
+Collections
+	- Map - Key,value
+	- Struct - object reference
+	- Array - index
+
+hive -f <scriptname> - to run a script
+
+Databases - NameSpace
+	-> Tables
+		-> Partition
+			-> Buckets
+
+Create Table 
+External - When dropped data exist, Metadata is dropped. data from external sources. Needs to specify the location for data retrieval
+Internal/Managed Table - data is stored in default path /user/warehouse/hive
 
 Load ??
