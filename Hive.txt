@@ -41,8 +41,212 @@ Databases - NameSpace
 		-> Partition
 			-> Buckets
 
+DDL:
+Database
+
+
+USE <databasename>
+
+
+
+
+
+Create:
 Create Table 
 External - When dropped data exist, Metadata is dropped. data from external sources. Needs to specify the location for data retrieval
 Internal/Managed Table - data is stored in default path /user/warehouse/hive
 
-Load ??
+
+CREATE DATABASE <databasename>
+LOCATION 'my/user/'
+COMMENT 'this is my database'
+WITH DBPROPERTIES('createdby' = 'upendra', 'date' = '2020-01-01')
+
+create table tablename(col1 int,col2 string) row format delimited fields terminated by ','
+
+create view <viewname> as select * from <tablename>
+
+CREATE FUNCTION [IF NOT EXISTS] [db_name.]function_name([arg_type[, arg_type...])
+  RETURNS return_type
+  LOCATION 'hdfs_path'
+  SYMBOL='symbol_or_class'
+
+CREATE INDEX index_col ON TABLE tablename(col)
+AS 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler';
+
+Drop:
+
+DROP DATABASE IF EXIST <databasename>
+
+DROP TABLE IF EXISTS <tablename>;
+
+DROP view <viewname>;
+
+DROP INDEX <index_name> ON <table_name>;
+
+Alter:
+
+ALTER DATABASE test_db RENAME TO test_db_new;
+
+alter table <tablename>  add columns(car int);
+
+ALTER DATABASE <databasename> SET DBPROPERTIES('createdby' = 'upendra', 'date' = '2020-01-01') - only to update properties
+
+
+SHOW DATABASES;
+
+show table;
+
+show partitions databasename.tablename;
+
+show create view databasename.viewname;
+
+DESCRIBE DATABASE <databasename>
+
+DESCRIBE DATABASE EXTENDED <databasename>
+
+DESCRIBE TABLE
+
+
+DML:
+
+When you want to load data from your local machine,
+load data local inpath [FilePath] into table <tablename>
+LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
+When you want to load data directly from HDFS,
+load data  inpath  into table <tablename>
+
+
+hive> create table records (name string,age int,cgpa decimal(3,2))clustered by (age) into 2 buckets stored as orc tblproperties('transactional'='true');
+
+hive> insert into table records values('john Cena',45,8.02),('batista',48,8.96);
+
+hive> select * from records;
+OK
+batista    48    8.96
+john Cena    45    8.02
+Time taken: 0.109 seconds, Fetched: 2 row(s)
+
+hive> update records set name='justin' where age=45;
+select * from records;
+hive> select * from records;
+OK
+batista	48	8.96
+justin	45	8.02
+
+
+hive> merge into employee
+    > using (select * from empmerge) sub
+    > on sub.id=employee.id
+    > when matched then update set name=sub.name,place=sub.place
+    > when not matched then insert values(sub.id,sub.name,sub.state);
+
+
+set hive.txn.manager=org.apache.hadoop.hive.ql.lockmgr.DbTxnManager;
+set hive.enforce.bucketing=true;
+set hive.exec.dynamic.partition.mode=nonstrict
+
+select dept,count(*) from person group by dept;
+ select * from person order by salary DESC;
+
+select id, name from person distribute by id; same categories go to single file/reducer
+
+select id, name from person cluster by id;
+
+JOINS - dont handle non equal join
+
+select sales.* , product.*
+    > FROM sales JOIN product ON(sales.id=product.id);
+
+select sales.*,product.* 
+    > from sales 
+    > left outer join 
+    > product on (sales.id=product.id);
+
+select sales.*,product.* 
+    > from sales 
+    > right outer join product on (sales.id=product.id);
+
+select sales.*,product.* 
+    > from sales 
+    > full outer join product on (sales.id=product.id);
+
+select * 
+    > from product
+    > left semi join sales on(sales.id=product.id);
+
+create table <tablename> as select sales.*,product.* 
+    > from sales 
+    > right outer join product on (sales.id=product.id);
+
+Map Side Join - less time, with constrains
+Reduce Side Join - flexible, lot of time
+
+
+Partitioning - to improve performance - does the activity only on that partition
+- it is directory
+
+Static Partitioning 
+Dynamic partitioning.
+
+=>set hive.exec.dynamic.partition.mode=nonstrict;
+(as hive is by default set to strict mode)
+=>load data local inpath '/home/arani/Desktop/cities.csv' overwrite into table city partition(city="chennai");
+=>load data local inpath '/home/arani/Desktop/cities2.csv' overwrite into table city partition(city="mumbai");
+
+=>select * from city where city="chennai";
+
+Bucket - to improve the latency of partitioning
+- is a file
+- we can specify the number of the buckets
+
+create table bucket_table(id int,firstname string,lastname string) clustered by (id) into 5 buckets row format delimited fields terminated by ',';
+
+hive>insert overwrite table bucket_table select * from table1;
+
+hadoopusr$ hdfs dfs -cat /user/hive/warehouse/bucketeddb.db/bucket_table/000000_0 in terminal.
+set hive.enforce.bucketing=true;
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+hive> create table partition_table(id int,lastname string) partitioned by(firstname string) clustered by (id) into 5 buckets row format delimited fields terminated by ',';
+
+Data Sampling
+select * from bucket_table tablesample(bucket 1 out of 5 on id);
+
+UDF - User Defined Functions
+-> create a java class and create a jar file.
+-> must import org.apache.hadoop.hive.ql.exec.UDF
+
+hive> add jar /home/arani/Desktop/HIVE_DOCUMENTATION/UDFExample.jar;
+
+hive> create temporary function removeCharacter as 'UDFExample';
+
+hive> select removeCharacter(name,'$') from udf_example;
+
+UDAF - User Defined Aggregate Funtion
+
+1.init().
+
+2.iterate().
+
+3.terminatePartial().
+
+4.merge().
+
+5.terminate().
+
+UDTF - User Defined Tabular Function
+
+1.initialize()
+
+2.process()
+
+3.close()
+
+
+
+
+
+
+
+
