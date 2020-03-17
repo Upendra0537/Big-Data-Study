@@ -214,7 +214,8 @@ Data Sampling
 select * from bucket_table tablesample(bucket 1 out of 5 on id);
 
 UDF - User Defined Functions
--> create a java class and create a jar file.
+-> creals
+te a java class and create a jar file.
 -> must import org.apache.hadoop.hive.ql.exec.UDF
 
 hive> add jar /home/arani/Desktop/HIVE_DOCUMENTATION/UDFExample.jar;
@@ -245,8 +246,83 @@ UDTF - User Defined Tabular Function
 
 
 
+CREATE TABLE distributor(District_ID varchar, Distributor_Name varchar, Buy_Rate varchar, Sell_Rate varchar, VolumeIN int, VolumeOUT int, Year int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/user/hadoop/tmp/oil.txt' OVERWRITE TABLE INTO distributor
+
+SELECT Distributor_Name, sum(cast(Sell_Rate as int) * VolumeOUT) AS Selling_Amount FROM distributor GROUP BY Distributor_Name ORDER BY Selling_Amount DESC LIMIT 10;
+ 	
+SELECT Distributor_Name, MIN(Sell_Rate), SUM(VolumeOUT * cast(Sell_Rate as int) FROM distributor GROUP BY Distributor_name
+
+select Distributor_name, sum(volumeOUT) from distributor group by Distributor_name, Year 
+
+
+create table games(AthleteName String, Age int, Country String, Year int, Closing_Date String, Sport String, Gold_Medals int, Silver_Medals int, Bronze_Medals int, Total_Medals int) row format delimited fields terminated by ',';
+
+load data inpath ' ' into games
+
+select Country, sum(Total_Medals) from games where Sport = 'Swimming' group by Country
+
+select Year, sum(Total_Medals) from games where Country='India' group by Year
+
+select Country, sum(Total_Medals) from games group by Country
+
+select Country, sum(Gold_Medals) from games group by Country
+
+select Country, Year from games where Sport='Shooting' group by Year
+
+sudo service cloudera-scm-agent restart
+
+
+sudo service cloudera-scm-agent restart
+sudo hdfs dfsadmin -safemode leave
+
+hdfs dfsadmin -safemode get
+
+sudo -u hdfs hdfs fsck / -listcourrptblocks
+
+https://13.233.158.140:7180/cmf/home
+
+@Sameeth Shetty . I spent around 6 hrs trying to figure/solve the fresco playground for cloudera. Still having lot many questions. I have read through the discussion notes but did not help. Can you share clear direction on a) Connection Details b) Common Errors and basic troubleshooting c) Sample data for the Hand's ON.  
+
+Rohini Dasgupta
+
+
+Name	age	country	Year	Closing_Date	Sport	Gold_Medals	Silver_Medals	Bronze_Medals	Total_Medals
+Michael Dee	23	United States	2009	2009-02-03	Swimming	23	3	2	28
+Larisa Latynina	26	Soviet Union	1964	1964-03-02	Gymnastics	9	5	4	16
+Takashi Ono	30	Japan	 1975	1975-06-09	Shooting	5	4	4	13
+Matt Biondi	32	United States	1992	1992-01-06	Swimming	8	2	1	11
+Natalie Coughlin	52	India	1960	1960-02-05	Swimming	3	2	2	7
+Ram Dee	23	United States	2009	2009-02-03	Swimming	23	3	2	28
+Larisa lotta	26	Soviet Union	1964	1964-03-02	Shooting	9	5	4	16
+Taboo Ono	30	Japan	 1975	1975-06-09	Gymnastics	5	4	4	13
+Matt Bonda	32	United States	1980	1980-01-06	Shooting	8	2	1	11
+Nata Mati	52	India	1962	1962-02-05	Swimming	3	2	2	7	
+Nam ko	52	India	1960	1960-02-05	Swimming	3	2	2	7
+la doo	23	United States	2009	2009-02-03	Swimming	23	3	2	28
+kim koo	26	India	1964	1964-03-02	Shooting	9	5	4	16
+Taboo minu 30	Japan	 1975	1975-06-09	Gymnastics	5	4	4	13
+ravo Bonda	32	United States	1980	1980-01-06	Shooting	8	2	1	11
+kati Mati	52	India	1969	1969-02-05	Swimming	3	2	2	7	
 
 
 
-
+Id	Name	Buyrate	sellrate	volumeIn	VolumeOut	Year
+001M1	shell	957.70	5779.92	933	843	1624
+001M2	bpl	675.24	3400.78	600	780	1625
+001M3	Hindustan	650.00	5000.00	852	952	1750
+001M4	Indian	789.52	7232.86	216	895	1760
+002M1	shell	934.70	5649.92	567	898	1755
+002M2	bpl	689.24	3780.78	578	870	1765
+002M3	Hindustan	750.00	5780.00	852	990	1780
+002M4	Indian	389.52	7982.86	216	895	17970
+011M1	shell	263.70	5979.92	933	843	1750
+011M2	bpl	235.24	3400.78	600	780	1752
+011M3	Hindustan	650.00	7800.00	852	952	1750
+011M4	Indian	239.52	3432.86	216	895	1767
+012M1	shell	744.70	9749.92	567	898	1753
+012M2	bpl	979.24	9780.78	578	870	1769
+012M3	Hindustan	350.00	8780.00	852	990	1783
+012M4	Indian	453.52	7952.86	216	895	1791
 
