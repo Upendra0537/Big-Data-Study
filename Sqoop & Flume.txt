@@ -1,0 +1,43 @@
+Data movements
+- Data at rest
+- Data in motion
+- Data from WebServices
+- Data from Warehouse
+
+
+Sqoop 
+
+- Import and Export of data from Hdfs/hive to/from RelationDatabase.
+- Submits a Map Function at the backend. By default 4 Mappers
+- Creates a Java Class with Getters and Setters which helps in transfer of data over the network
+- Uses JDBC Connection to connect to the source/target of Database.
+- Can also use direct mode without JDBC Connection which should be supported by the database like MySql Dump
+- Command level 
+- must need a Unique key to split the data into multiples mappers
+- By default assumes data is seperated by comma and row ends with Newline
+
+
+Commands
+Sqoop import/export --connect jdbc:db2://your.db2.com:50000/yourdb \ --username db2user --password yourpassword --table db2table \ --target-dir sqoopdata
+
+sqoopdata - target directory in the HDFS
+
+--Split-by table_primarykey
+--columns "column1"
+--where "salary>400""
+--query "select..."
+
+Flume
+- Transfer of continous stream of data from Source and Target
+- Flume Agents needs to be present at both the Source(Logs) and Target(HDFS)
+- Flume Agents has
+	- Source
+	- Channel
+	- Sink
+Data transfer
+WebServer(Logs) =>  Source(Logs) -> Channel -> Sink(Avro)  ==> Source(Avro) -> Channel - Sink(HDFS)
+                                     Agent 1                          Agent 2
+
+
+Avro is a remote procedure call and serialization framework
+uses a java property configuration file for setting up of source, channel and sink in an agent
