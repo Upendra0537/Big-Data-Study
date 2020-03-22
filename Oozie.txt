@@ -1,0 +1,39 @@
+Oozie
+- Used for scheduling and stream linking muliple processess 
+- Job Flow not a data flow
+- Direct Acyclic Graph - no loops in the flow
+- Controlled by Workflow.xml - should be present in hdfs
+- Config-default.xml - contains the action details
+- job.properties files for all the reference variables - can be in local machine
+- All the action files need to be in the Hadoop Environment
+- Oozie definitions written in the Hadoop Process Definition Language (hPDL)
+	- Control Flow Nodes
+		- Start
+		- End
+		- Kill
+		- Fork - to run multiple actions in Parallel
+		- Join - to join the multiple flow actions to a single flow
+		- Decision - directs the flow based on conditions
+	- Action Flow Nodes
+		- Map Reduce
+		- Java Actions
+		- Pig
+		- Hive
+		- Sqoop
+		- HDFS tasks
+		- Emails
+		- other Oozie flows
+
+Actions results in OK or ERROR
+Action Completion
+	- CallBack
+	- Polling
+
+Command to run the Oozie 
+./oozie job -run -config <<location of job.property>
+
+Oozie Coordinator
+- reoccuring and dependent workflow
+- Coordinator.xml
+- coord-config-default.xml
+- coordinator.properties
