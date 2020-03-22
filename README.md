@@ -12,3 +12,5 @@ Cloudera - Fresco Play
 MapR - MapR
 
 Hive - Fresco Play
+
+Moving Data into Hadoop - SQOOP & Flume - Big Data University
